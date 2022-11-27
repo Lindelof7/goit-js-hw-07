@@ -33,24 +33,21 @@ function onImgClick(e) {
     <div class="modal">
     <img src="${e.target.dataset.source}" width = "800" height = "600">
     </div>
-`)
+`, {
+     onShow: (instance) => {
+    galleryEl.addEventListener("keydown", onEscapeButton);
+    
+      },
+      onClose: (instance) => {
+        galleryEl.removeEventListener("keydown", onEscapeButton);
 
-   if (e.target.nodeName !== 'IMG') {
-    return
-  } else {
-  
-instance.show()
-   }
-  if (instance.show()) {
-  document.addEventListener("keydown",(e)=>
-    {
-      if(e.key === "Escape"){
-    instance.close()
-    } 
-})
-  }
-  if (e.key === "Escape") {
-    document.removeEventListener("keydown", (e)  )
-  }
+      },
+  })
+
+  instance.show();
+  function onEscapeButton(e) {
+    if (e.key === "Escape") {
+      instance.close()
+    }
 }
-
+}
